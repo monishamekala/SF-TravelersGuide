@@ -1,0 +1,23 @@
+.custom-navbar-bg-color{
+    background-image: linear-gradient(to right, #64d3ee, #e6c9f0);
+}
+
+.custom-offcanvas-bg{
+    background-image: linear-gradient(#e6c9f0, #64d3ee);
+}
+
+.offcanvas{
+    --bs-offcanvas-width: 250px;
+}
+
+.navbar>.container-fluid{
+    display: inline;
+}
+
+.brand-name{
+    margin-left: 20px;
+    font-family: 'Lora', serif;
+    font-size: 30px;
+    font-weight: 700;
+    padding-top: 0px;
+}
