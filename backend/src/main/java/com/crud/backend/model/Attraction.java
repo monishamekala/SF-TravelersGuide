@@ -1,0 +1,5 @@
+package com.crud.backend.model;
+
+public class Attraction {
+
+}
