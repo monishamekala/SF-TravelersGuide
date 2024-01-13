@@ -1,5 +1,22 @@
 package com.crud.backend.service;
 
-public class CityService {
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.crud.backend.model.City;
+import com.crud.backend.repository.CityRepository;
+
+@Service
+public class CityService implements ICityService {
+
+	@Autowired
+	private CityRepository cityRepository;
+	
+	@Override
+	public List<City> getAllCities() {
+		// TODO Auto-generated method stub
+		return cityRepository.findAll();
+	}
 }
