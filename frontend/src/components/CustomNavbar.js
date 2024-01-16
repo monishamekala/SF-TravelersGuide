@@ -2,6 +2,9 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/esm/Row';
+
 import '../assets/css/CustomNavbar.css';
 
 function CustomNavbar(){
@@ -10,8 +13,10 @@ function CustomNavbar(){
             {[false].map((expand) => (
                 <Navbar key={expand} expand={expand} className="bg-body-tertiary custom-navbar-bg-color">
                 <Container fluid>
-                    <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
-                    <Navbar.Brand href="/" className='brand-name'>CRUD.</Navbar.Brand>
+                    <Row>
+                        <Col><Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} /></Col>
+                        <Col><Navbar.Brand href="/" className='brand-name'>CRUD.</Navbar.Brand></Col>
+                    </Row>
                     <Navbar.Offcanvas
                     id={`offcanvasNavbar-expand-${expand}`}
                     aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
@@ -31,8 +36,6 @@ function CustomNavbar(){
                         </Nav>                
                     </Offcanvas.Body>
                     </Navbar.Offcanvas>
-
-                    
                 </Container>
                 </Navbar>
             ))}

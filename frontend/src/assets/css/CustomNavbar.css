@@ -10,12 +10,7 @@
     --bs-offcanvas-width: 250px;
 }
 
-.navbar>.container-fluid{
-    display: inline;
-}
-
 .brand-name{
-    margin-left: 20px;
     font-family: 'Lora', serif;
     font-size: 30px;
     font-weight: 700;
