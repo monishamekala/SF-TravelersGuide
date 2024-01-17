@@ -1,1 +1,10 @@
+.pagination{
+    --bs-pagination-color:#64d3ee;
+    --bs-pagination-active-bg: #e6c9f0;
+    --bs-pagination-active-border-color:#64d3ee;
+    --bs-pagination-hover-color:#e6c9f0;
+}
 
+.table{
+    --bs-table-hover-bg:#64d3ee;
+}
