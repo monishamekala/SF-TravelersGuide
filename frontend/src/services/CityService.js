@@ -1,14 +1,23 @@
 import axios from 'axios';
+import Constants from '../Constants';
 
 const CityService = {
     getAllCitites: async function(){
-        try{
-            const getCitiesURL = "/api/city/getallcities";
-            const response = await axios.get(process.env.REACT_APP_API_URL.concat(getCitiesURL));
+        try{            
+            const response = await axios.get(process.env.REACT_APP_API_URL.concat(Constants.cityAPI.getAllCitiesAPI));
             return response.data;
         }catch(err){
             console.log(err);
         }
+    },
+    getCityByCountryCode: function (countryCode) {
+        const lstcities = axios.get(process.env.REACT_APP_API_URL.concat(Constants.cityAPI.getCitiesbyCountryCode.concat(countryCode)))
+        .then((response) => {
+            return response.data;
+        }).catch((err) => {
+            console.log(err.message);
+        });
+        return lstcities;
     }
 }
 
