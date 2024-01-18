@@ -19,4 +19,10 @@ public class CityService implements ICityService {
 		// TODO Auto-generated method stub
 		return cityRepository.findAll();
 	}
+	
+	@Override
+	public List<City> getCitiesByCountryCode(String code) {
+		// TODO Auto-generated method stub
+		return cityRepository.findCitiesByCountryCode(code);
+	}
 }

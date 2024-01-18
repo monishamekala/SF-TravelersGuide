@@ -7,5 +7,7 @@ import com.crud.backend.model.Attraction;
 public interface IAttractionService {
 	
 	public List<Attraction> getAllAttractions();
+	
+	public Attraction createAttraction(Attraction attraction);
 
 }

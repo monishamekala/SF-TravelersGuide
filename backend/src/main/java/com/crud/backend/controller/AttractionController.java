@@ -3,8 +3,13 @@ package com.crud.backend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+//import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,5 +32,12 @@ public class AttractionController {
 	@GetMapping("/getallattractions")
 	public List<Attraction> GetAllAttractions() {
 		return attractionService.getAllAttractions();
+	}
+	
+	@PostMapping(value = "/createattraction", consumes = { "application/json" })
+	public ResponseEntity<Attraction> CreateAttraction(@RequestBody Attraction attraction) {		
+		Attraction savedAttraction = attractionService.createAttraction(attraction);
+		// HTTP Status of 201 - A resource (attraction) was created.
+		return new ResponseEntity<Attraction>(savedAttraction, HttpStatus.CREATED);
 	}
 }
