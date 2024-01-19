@@ -17,6 +17,9 @@ const Constants = {
         getAllCitiesAPI: '/api/city/getallcities',
         searchCityAPI: '/api/city/searchcity',
         getCitiesbyCountryCode: '/api/city/getcitiesbycountrycode?code='
+    },
+    countryAPI: {
+        getAllCountriesAPI: '/api/country/getallcountries'
     }
 }
 

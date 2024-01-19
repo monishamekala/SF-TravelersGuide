@@ -1,5 +1,11 @@
 package com.crud.backend.repository;
 
-public interface CountryRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.crud.backend.model.Country;
+
+@Repository
+public interface CountryRepository extends JpaRepository<Country, Integer>{
 
 }

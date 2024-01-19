@@ -40,34 +40,30 @@ function CityMain() {
     }, []);
 
     return (
-        <Container fluid>
-            <Row className="justify-content-md-center">
-                <Col md = "auto"><h1>Cities</h1></Col>
+        <Container>
+            <Row>
+                <Col><h1>Cities</h1></Col>
             </Row>
             <Row>
-                <Container fluid="md">
-                    <Row className='mx-4'>
-                        <Col>
-                            <Table hover bordered>
-                                <thead>
-                                    <tr>
-                                        <th>City</th>
-                                        <th>City Code</th>
-                                        <th>Country Code</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {currentCities.map((city) => (
-                                        <tr key = {city.id}>
-                                            <td>{city.name}</td>
-                                            <td>{city.code}</td>
-                                            <td>{city.countrycode}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </Table>
-                        </Col>
-                    </Row>
+                <Container fluid = 'md'>
+                    <Table hover bordered>
+                        <thead>
+                            <tr>
+                                <th>City</th>
+                                <th>City Code</th>
+                                <th>Country Code</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {currentCities.map((city) => (
+                                <tr key = {city.id}>
+                                    <td>{city.name}</td>
+                                    <td>{city.code}</td>
+                                    <td>{city.countrycode}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
                 </Container>
             </Row>
             <Row>
