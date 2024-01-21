@@ -14,6 +14,7 @@ import Button from 'react-bootstrap/Button';
 // Services, classes, and helpers
 import AttractionService from '../../services/AttractionService';
 import CityService from '../../services/CityService';
+import CountryService from '../../services/CountryService';
 import Constants from '../../Constants';
 import AttractionModel from '../../model/AttractionModel';
 
@@ -34,9 +35,11 @@ function AttractionCreate() {
     // Sweetalert2 variables
     const MySwal = withReactContent(Swal);
 
-    // useEffect(() => {       
-    //     // Here will go the getAllCountries service method
-    // }, []);
+    useEffect(() => {       
+        CountryService.getAllCountries().then((result) => {
+            setLstCountries(result);
+        });
+    }, []);
 
     const createAttraction = () => {
         MySwal.fire({
@@ -68,19 +71,9 @@ function AttractionCreate() {
         });
     }
 
-    const onChangeCountryList = (val) => {
-        // INIT ------------------------------
-        // Temporal code until Country Management (getAllCountries) is completed
-        let countryCode = "";
-        if (val === '176') {
-            countryCode = 'PE';
-        }
-        if (val === '103') {
-            countryCode = 'IN';
-        } else {
-            countryCode = 'PE';
-        }
-        // END ------------------------------
+    const onChangeCountryList = (val) => {        
+        var countryCode = "";
+        countryCode = lstCountries.filter((country) => { return country.id == val })[0].code;
         filterCityByCountry(countryCode);
     }
 
@@ -138,10 +131,8 @@ function AttractionCreate() {
                             <Form.Label>Country</Form.Label>
                             <Form.Select id='attraction_countryid' onChange={handleAttractionChange} value={attractionForm.country_id}>
                                 <option>Choose country</option>
-                                <option value="176">Peru</option>
-                                <option value="103">India</option>
                                 {lstCountries.map((country, idx) => 
-                                    <option key={idx} value={country.name}>{country.name}</option>
+                                    <option key={idx} value={country.id}>{country.name}</option>
                                 )}
                             </Form.Select>
                         </Form.Group>
