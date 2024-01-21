@@ -16,6 +16,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 // Services and helpers
 import AttractionService from '../../services/AttractionService';
 import CityService from '../../services/CityService';
+import CountryService from '../../services/CountryService';
 import Constants from '../../Constants';
 
 function AttractionMain() {
@@ -23,6 +24,7 @@ function AttractionMain() {
     // State variables
     const [lstAttractions, setLstAttractions] = useState([]);
     const [lstCities, setLstCities] = useState([]);
+    const [lstCountries, setLstCountries] = useState([]);
 
     // Navigation variables
     let navigate = useNavigate();
@@ -31,7 +33,7 @@ function AttractionMain() {
     useEffect(() => {
         CityService.getAllCitites().then((result) => {
             setLstCities(result);
-            getAllAttractions();
+            getAllCountries();            
         });     
     }, []);    
 
@@ -45,9 +47,21 @@ function AttractionMain() {
         });
     }
 
+    const getAllCountries = () => {
+        CountryService.getAllCountries().then((result) => {
+            setLstCountries(result);
+            getAllAttractions();
+        });
+    }
+
     const filterCityForAttraction = (city_id) => {
-        var cityFound = lstCities.filter(function (city) { return city.id === city_id })[0];
+        var cityFound = lstCities.filter((city) => { return city.id === city_id })[0];
         return cityFound.name;
+    }
+
+    const filterCountryForAttraction = (country_id) => {
+        var countryFound = lstCountries.filter((country) => { return country.id === country_id })[0];
+        return countryFound.name;
     }
 
     const searchAttraction = () => {
@@ -95,7 +109,7 @@ function AttractionMain() {
                                 <td>{item.description}</td>
                                 <td>{item.comments}</td>
                                 <td>{filterCityForAttraction(item.city_id)}</td>
-                                <td>{item.country_id}</td>
+                                <td>{filterCountryForAttraction(item.country_id)}</td>                                
                             </tr>
                         ))}
                     </tbody>
