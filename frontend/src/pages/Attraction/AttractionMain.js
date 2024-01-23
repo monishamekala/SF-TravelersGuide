@@ -12,12 +12,17 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
+import Stack from 'react-bootstrap/Stack';
 
 // Services and helpers
 import AttractionService from '../../services/AttractionService';
 import CityService from '../../services/CityService';
 import CountryService from '../../services/CountryService';
 import Constants from '../../Constants';
+
+// Sweetalert2 library
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 function AttractionMain() {
 
@@ -29,11 +34,14 @@ function AttractionMain() {
     // Navigation variables
     let navigate = useNavigate();
 
+    // Sweetalert2 variables
+    const MySwal = withReactContent(Swal);
+
     // Function(s) that run once the component is mounted
     useEffect(() => {
         CityService.getAllCitites().then((result) => {
             setLstCities(result);
-            getAllCountries();            
+            getAllCountries();
         });     
     }, []);    
 
@@ -68,6 +76,25 @@ function AttractionMain() {
         console.log("Search attraction");
     }
 
+    const deleteAttraction = (attraction_id, attraction_name) => {
+        MySwal.fire({
+            title: 'Are you sure?',
+            text: "This action will delete the attraction: [" + attraction_name + "]",
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Delete',
+            confirmButtonColor: '#0d6efd'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                AttractionService.deleteAttraction(attraction_id).then((result) => {
+                    getAllAttractions();
+                    MySwal.fire({ title: 'Deleted!', text: 'Attraction ['+ result.name + '] was successfuly deleted.', icon: 'success' });
+                });
+            }
+        })
+    }
+
     return (
         <Container className='my-4'>
             <Row>
@@ -99,6 +126,7 @@ function AttractionMain() {
                             <th>Comments</th>
                             <th>City</th>
                             <th>Country</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -109,7 +137,13 @@ function AttractionMain() {
                                 <td>{item.description}</td>
                                 <td>{item.comments}</td>
                                 <td>{filterCityForAttraction(item.city_id)}</td>
-                                <td>{filterCountryForAttraction(item.country_id)}</td>                                
+                                <td>{filterCountryForAttraction(item.country_id)}</td>
+                                <td>
+                                    <Stack direction='horizontal' gap={1}>
+                                        <Button variant='outline-primary'>Edit</Button>
+                                        <Button variant='outline-danger' onClick={() => { deleteAttraction(item.id, item.name) }}>Delete</Button>
+                                    </Stack>                                    
+                                </td>
                             </tr>
                         ))}
                     </tbody>

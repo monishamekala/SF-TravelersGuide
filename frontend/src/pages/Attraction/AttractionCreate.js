@@ -52,10 +52,9 @@ function AttractionCreate() {
             confirmButtonColor: '#0d6efd'
         }).then((result) => {
             if (result.isConfirmed) {
-                AttractionService.createAttraction(attractionForm).then((result) => {                    
-                    console.log('Attraction created:', result);
+                AttractionService.createAttraction(attractionForm).then((result) => {
                     setAttractionForm(new AttractionModel());
-                    MySwal.fire({ title: 'Created!', text: 'Attraction was successfuly created', icon: 'success' });
+                    MySwal.fire({ title: 'Created!', text: 'Attraction was successfuly created.', icon: 'success' });
                 });                
             }
         })        

@@ -35,6 +35,15 @@ const AttractionService = {
             console.log(err.message);
         });
         return create_attraction;
+    },
+    deleteAttraction: function (attractionId) {
+        const del_attraction = axios.put(process.env.REACT_APP_API_URL.concat(Constants.attractionAPI.deleteAttractionAPI.concat(attractionId)))
+        .then((response) => {
+            return response.data;
+        }).catch((err) => {
+            console.log(err.message);
+        })
+        return del_attraction;
     }
 }
 

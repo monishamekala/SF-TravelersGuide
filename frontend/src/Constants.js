@@ -11,7 +11,7 @@ const Constants = {
         searchAttractionsAPI: '/api/attraction/searchattraction',
         createAttractionAPI: '/api/attraction/createattraction',
         editAttractionAPI: '/api/attraction/editattraction',
-        deleteAttractionAPI: '/api/attraction/deleteattraction'
+        deleteAttractionAPI: '/api/attraction/deleteattraction?id='
     },
     cityAPI: {
         getAllCitiesAPI: '/api/city/getallcities',
