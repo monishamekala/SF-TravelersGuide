@@ -2,6 +2,7 @@ package com.crud.backend.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,9 @@ public class AttractionService implements IAttractionService {
 	@Override
 	public List<Attraction> getAllAttractions() {
 		// TODO Auto-generated method stub
-		return attractionRepository.findAll();
+		// Get attractions where the field "Deleted" is false
+		// "Deleted" field is used to "soft-delete" an attraction
+		return attractionRepository.getCitiesByDeletedField();
 	}
 	
 	@Override
@@ -36,5 +39,20 @@ public class AttractionService implements IAttractionService {
 		// Save the attraction and return to the controller
 		Attraction savedAttraction = attractionRepository.save(attraction);
 		return savedAttraction;
+	}
+	
+	@Override
+	public Attraction deleteAttraction(String id) {
+		// TODO Auto-generated method stub
+		Attraction delAttraction = attractionRepository.findById(Integer.parseInt(id)).orElse(null);
+		if (delAttraction == null) {
+			return null;
+		}
+		Date currentDate = new Date();
+		delAttraction.setDeleted(true);
+		delAttraction.setLastupdateddatetime(currentDate);
+		Attraction savedAttraction = attractionRepository.save(delAttraction);
+		return savedAttraction;
+		
 	}
 }

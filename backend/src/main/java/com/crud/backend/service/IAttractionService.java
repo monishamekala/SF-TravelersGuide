@@ -9,5 +9,7 @@ public interface IAttractionService {
 	public List<Attraction> getAllAttractions();
 	
 	public Attraction createAttraction(Attraction attraction);
+	
+	public Attraction deleteAttraction(String id);
 
 }

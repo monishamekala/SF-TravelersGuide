@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 //import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.crud.backend.model.Attraction;
@@ -39,5 +41,14 @@ public class AttractionController {
 		Attraction savedAttraction = attractionService.createAttraction(attraction);
 		// HTTP Status of 201 - A resource (attraction) was created.
 		return new ResponseEntity<Attraction>(savedAttraction, HttpStatus.CREATED);
+	}
+	
+	@PutMapping("/deleteattraction")
+	public ResponseEntity<Attraction> DeleteAttraction(@RequestParam String id) {
+		Attraction deletedAttraction = attractionService.deleteAttraction(id);
+		if (deletedAttraction == null) {
+			return new ResponseEntity<Attraction>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Attraction>(deletedAttraction, HttpStatus.OK);
 	}
 }
