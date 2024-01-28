@@ -35,4 +35,8 @@ public class CityController {
 		return cityService.getCitiesByCountryCode(code);
 	}
 	
+	@GetMapping("/searchcitybycityname")
+	public List<City> GetCitiesByCityName(@RequestParam String name){
+		return cityService.getCitiesByCityName(name);
+	}
 }

@@ -25,4 +25,9 @@ public class CityService implements ICityService {
 		// TODO Auto-generated method stub
 		return cityRepository.findCitiesByCountryCode(code);
 	}
+	
+	@Override
+	public List<City> getCitiesByCityName(String name) {
+		return cityRepository.findCitiesByCityName(name);
+	}
 }

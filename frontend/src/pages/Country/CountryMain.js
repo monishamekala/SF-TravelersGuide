@@ -22,7 +22,7 @@ function CountryMain() {
     }, []);
 
     return (
-        <Container>
+        <Container className='my-4'>
             <Row>
                 <Col><h1>Countries</h1></Col>
             </Row>

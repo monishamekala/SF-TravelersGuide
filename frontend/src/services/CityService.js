@@ -18,6 +18,14 @@ const CityService = {
             console.log(err.message);
         });
         return lstcities;
+    },
+    getCityByCityName: function (name) {
+        try{
+            const CitySearchResults = axios.get(process.env.REACT_APP_API_URL.concat(Constants.cityAPI.getCitiesByCityName.concat(name)))
+            return CitySearchResults.data;
+        }catch(err){
+            console.log(err);
+        }
     }
 }
 
