@@ -15,4 +15,6 @@ public interface CityRepository extends JpaRepository<City, Integer> {
 	@Query(value =  "SELECT * FROM city c WHERE c.countrycode = :countrycode", nativeQuery = true)
 	List<City> findCitiesByCountryCode(@Param("countrycode") String countrycode);
 	
+	@Query(value = "SELECT * FROM city WHERE name ILIKE %:name%", nativeQuery = true)
+	List<City> findCitiesByCityName(@Param("name") String name);
 }

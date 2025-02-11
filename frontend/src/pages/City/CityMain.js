@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react';
+
 import Table from 'react-bootstrap/Table';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Pagination from 'react-bootstrap/Pagination';
 import Container from 'react-bootstrap/Container';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Form from 'react-bootstrap/Form';
 
 import "../../assets/css/CityMain.css"
 import CityService from '../../services/CityService';
+import Button from 'react-bootstrap/esm/Button';
 
 function CityMain() {
     const [Cities, setCities] = useState([]);
+    const [SearchCityName, setSearchCityName] = useState("");
+    const [SearchCityResults, setSearchCityResults] = useState([]);
 
     //pagination
     const itemsPerPage = 50;
@@ -27,6 +33,10 @@ function CityMain() {
     const totalPages = Math.ceil(Cities.length / itemsPerPage);
     const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
 
+    const handleInputChange = (event) => {
+        setSearchCityName(event.target.value)
+    }
+
     useEffect(() => {
         const fetchCities = async () => {
             try{
@@ -39,10 +49,28 @@ function CityMain() {
         fetchCities()
     }, []);
 
+    //search city with city name
+    const SearchCityByCityName = async () => {
+        try{
+            const CitySearchResults = await CityService.getCityByCityName(SearchCityName);
+            setSearchCityResults(CitySearchResults);
+        }catch(err){
+            console.log(err);
+        }
+    };
+
     return (
-        <Container>
+        <Container className='my-4'>
             <Row>
-                <Col><h1>Cities</h1></Col>
+                <Col xs = {9}><h1>Cities</h1></Col>
+                <Col xs = {3}>
+                    <InputGroup>
+                        <Form.Control placeholder = "Search City..." onChange={handleInputChange} value = {SearchCityName}/>
+                        <Button variant='primary' onClick={SearchCityByCityName}>
+                            <i className='bi bi-search'></i>
+                        </Button>
+                    </InputGroup>
+                </Col>
             </Row>
             <Row>
                 <Container fluid = 'md'>
@@ -70,11 +98,6 @@ function CityMain() {
                 <Container>
                     <Row className="justify-content-md-center">
                         <Col md = "auto">
-                            <small>Page No: {currentPage}</small>
-                        </Col>
-                    </Row>
-                    <Row className="justify-content-md-center">
-                        <Col md = "auto">
                             <Pagination>
                             <Pagination.First onClick={() => paginate(1)} />
                             <Pagination.Prev onClick={() => paginate(currentPage - 1)} />
@@ -95,6 +118,11 @@ function CityMain() {
                             <Pagination.Next onClick={() => paginate(currentPage + 1)} />
                             <Pagination.Last onClick={() => paginate(totalPages)} />
                             </Pagination>
+                        </Col>
+                    </Row>
+                    <Row className="justify-content-md-center">
+                        <Col md = "auto">
+                            <small>Page No: {currentPage}</small>
                         </Col>
                     </Row>
                 </Container>

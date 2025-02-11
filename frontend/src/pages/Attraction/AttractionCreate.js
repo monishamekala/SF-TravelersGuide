@@ -72,7 +72,7 @@ function AttractionCreate() {
 
     const onChangeCountryList = (val) => {        
         var countryCode = "";
-        countryCode = lstCountries.filter((country) => { return country.id == val })[0].code;
+        countryCode = lstCountries.filter((country) => { return country.id === val })[0].code;
         filterCityByCountry(countryCode);
     }
 
